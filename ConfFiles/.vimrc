@@ -1,4 +1,4 @@
-" AUTHOR: 
+" AUTHOR:
 " COPYRIGHT (C) KARLKORP
 " VIM CONFIGURATION FILE
 " E-MAIL: LISPGOD@GMAIL.COM
@@ -17,6 +17,9 @@ set cryptmethod=blowfish
 runtime macros/matchit.vim
 
 " =============================================================================
+
+
+set buftype=
 set smarttab
 set expandtab
 set tabstop=4
@@ -143,7 +146,6 @@ set statusline+=\ Buffer:[%n]
 set statusline+=\ Column:[%v]
 set statusline+=\ Line:%l/%L[%p%%]
 set statusline+=\ Mode:[%{ShowCurrentMode()}]
-
 " =============================================================================
 set switchbuf=newtab,split,useopen,usetab
 set tabline=""
@@ -288,6 +290,10 @@ if has("autocmd")
     augroup END
 endif
 
+
+
+
+
 " =============================================================================
 cnoreabbrev q q!
 cnoreabbrev Q q!
@@ -347,18 +353,38 @@ imap <F7> <esc>:bn<cr>i
 map <F9> :w<cr>:make<cr>
 vmap <F9> <esc>:w<cr>:make<cr>i
 imap <F9> <esc>:w<cr>:make<cr>i
-" F10 - включить-выключить браузер структуры документа (TagList)
-map <F10> :TlistToggle<cr>
-vmap <F10> <esc>:TlistToggle<cr>
-imap <F10> <esc>:TlistToggle<cr>
+"
+
+
+
+
+"
 " F11 - включить-выключить нумерацию строк
 imap <F11> <Esc>:set<Space>nu!<CR>a
 nmap <F11> :set<Space>nu!<CR>
+
 " F12 - обозреватель файлов (:Ex для стандартного обозревателя,
 " плагин NERDTree - дерево каталогов)
-map <F12> :NERDTreeToggle<cr>
-vmap <F12> <esc>:NERDTreeToggle<cr>i
-imap <F12> <esc>:NERDTreeToggle<cr>i
+map <F12> :Explore<cr>
+vmap <F12> <esc>:Explore<cr>i
+imap <F12> <esc>:Explore<cr>i
+
+
+" Save and make current file.o
+function! Make()
+    let curr_dir = expand('%:h')
+    if curr_dir == ''
+        let curr_dir = '.'
+    endif
+    echo curr_dir
+    execute 'lcd ' . curr_dir
+    execute 'make %:r.o'
+    execute 'lcd -'
+endfunction
+nnoremap <F10> :update<CR>:call Make()<CR>
+
+
+
 
 
 "" Переключение табов (вкладок) (rxvt-style)
@@ -368,10 +394,3 @@ imap <S-left> <ESC>:tabprevious<cr>i
 map <S-right> :tabnext<cr>
 nmap <S-right> :tabnext<cr>
 imap <S-right> <ESC>:tabnext<cr>i
-
-nmap <C-t> :tabnew<cr>
-imap <C-t> <ESC>:tabnew<cr>
-nmap <S-down> :tabnew<cr>
-imap <S-down> <ESC>:tabnew<cr>
-nmap <C-w> :tabclose<cr>
-imap <C-w> <ESC>:tabclose<cr>
