@@ -1,0 +1,14 @@
+C=gcc
+CFLAGS=-c
+LDFLAGS=pkg-config --cflags gtk+-2.0
+SOURCES=gtk1.c
+OBJECTS=$(SOURCES:.cpp=.o)
+	EXECUTABLE=hello
+
+all: $(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@

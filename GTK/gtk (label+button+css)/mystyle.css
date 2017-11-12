@@ -1,0 +1,12 @@
+
+window {
+    background-color: white;
+}
+
+label{
+    background: white;
+    text-shadow: 1px 1px 5px black;
+    box-shadow: 0px 0px 5px black;
+    border: 1px solid black;
+    font-size: 16pt;
+}

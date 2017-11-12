@@ -1,0 +1,21 @@
+CC = gcc
+SRC_DIR = .
+INC_DIR = .
+OBJ_DIR = Obj
+CFLAGS = -Wall -g -o
+PACKAGE = `pkg-config --cflags --libs gtk+-3.0`
+
+LDLIBS = $(shell pkg-config --libs gtk+-3.0)
+
+EXE = Gui
+
+SRCS = $(SRC_DIR)/main.c 
+OBJS = $(OBJ_DIR)/main.o 
+
+main : clean build       
+
+build: $(OBJS)
+    $(CC) $(OBJS) -o $(EXE)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+        $(CC) $(PACKAGE) $(CFLAGS) $< -o $@ 
