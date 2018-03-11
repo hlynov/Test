@@ -1,0 +1,12 @@
+1.
+sudo dnf -y install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+2.
+sudo dnf -y install gstreamer1-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-base-tools gstreamer1-plugins-good-extras gstreamer1-plugins-ugly gstreamer1-plugins-bad-free gstreamer1-plugins-good gstreamer1-plugins-base
+Зашифрованные DVD
+sudo dnf -y config-manager --add-repo=http://negativo17.org/repos/fedora-multimedia.repo
+sudo dnf -y install libdvdcss
+
+Мультимедийный проигрыватель VLC:
+sudo dnf -y install vlc
+Аудиопроигрыватель Audacious:
+sudo dnf -y install audacious audacious-plugins-freeworld-mp3 audacious-plugins-freeworld-aac
