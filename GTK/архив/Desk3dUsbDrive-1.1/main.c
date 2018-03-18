@@ -1,16 +1,34 @@
-#include <gtk/gtk.h>
 
-/* создание окна в этот раз мы вынесли в отдельную функцию */
-    static GtkWidget*
+
+#include <gtk/gtk.h>
+#include "deskusb.h"
+
+
+/* создание окна */
+
+static GtkWidget*
+
 create_window (void)
 {
-    /* это виджет окна */
+
+    /* Declare widgets */
     GtkWidget *window;
+
     GtkWidget *buttonfunc1;
+    GtkWidget *buttonfunc2;
+    GtkWidget *buttonfunc3;
+    GtkWidget *buttonfunc4;
+    GtkWidget *buttonfunc5;
+
     GtkWidget *lblresult;
 
+    /* End of Declare widgets */
 
-    /* это тот волшебный объект, который сделает за нас окошко */
+    // instantiate structure, allocating memory for it
+    app_widgets  *widgets = g_slice_new(app_widgets);
+
+
+    /* make window */
     GtkBuilder *builder;
 
 
@@ -26,15 +44,17 @@ create_window (void)
         g_error_free (error);
     }
 
-    /* помните, мы подключали сигналы вручную? теперь это происходит автоматически! */
-    gtk_builder_connect_signals (builder, NULL);
 
 
 
-    // get pointers to the two labels
+    // get pointers to the  widgets
     buttonfunc1 = GTK_WIDGET(gtk_builder_get_object(builder, "buttonfunc1"));
-    lblresult = GTK_WIDGET(gtk_builder_get_object(builder, "lblresult"));
+    widgets->w_lbl = GTK_WIDGET(gtk_builder_get_object(builder, "lblresult"));
+    //lblresult=data->lblresult;
 
+
+    /* signals connection */
+    gtk_builder_connect_signals (builder, widgets);
 
 
     /* получаем виджет окна, чтобы его показать */
@@ -49,10 +69,18 @@ create_window (void)
     return window;
 }
 
-/* это главная функция нашего приложения, которая будет выполнена первой */
-    int
-main (int argc, char *argv[])
+/* MAIN */
+
+int main (int argc, char *argv[])
 {
+
+    /* Declare variables */
+
+    int var[3]={100, 200, 300};
+    char textForLabel[]="My var works";
+
+
+
     /* виджет окна */
     GtkWidget *window;
 
@@ -68,11 +96,13 @@ main (int argc, char *argv[])
     return 0;
 }
 
-/* это и есть наш обработчик сигнала */
-    void
-f1clicked (GtkButton *buttonfunk1,
-        gpointer   lblresult)
+
+
+
+/* Handlers */
+
+void f1clicked (GtkButton *buttonfunk1, app_widgets *app_wgts)
 {
     /* установить метке текст */
-    gtk_label_set_text (lblresult, "Привет, Хабр!");
+    gtk_label_set_text (GTK_LABEL(app_wgts->w_lbl), "Привет, Хабр!");
 }
