@@ -2,7 +2,6 @@
 #include "hl_d3d.h"
 #include "hl_usb.h"
 
-
 //***********************************************************************
 //MAIN
 //***********************************************************************
@@ -13,15 +12,24 @@ int main(int argc, char *argv[])
     /* Declare variables */
     int var[3]={100, 200, 300};
     char textForLabel[]="My var works";
+
+    int ExitLoop = 0;
+    int *ptrExitLoop;
+    ptrExitLoop = & ExitLoop;
+
+    int rx[8];
+
     /* END of Declare variables */
+
+
 
     // instantiate structure, allocating memory for it
     app_widgets        *widgets = g_slice_new(app_widgets);
     TestStruct         *status = g_slice_new(TestStruct);
     Data data;
 
-    data.i=123;
-    check=1;
+    //data.check[10] = "fuck off\n";
+
 
     /* запускаем GTK+ */
     gtk_init(&argc, &argv);
@@ -35,6 +43,10 @@ int main(int argc, char *argv[])
     widgets->w_lbl_time  = GTK_WIDGET(gtk_builder_get_object(builder, "lbl_time"));
     widgets->w_lbl_count = GTK_WIDGET(gtk_builder_get_object(builder, "lbl_count"));
     buttonf2 = GTK_WIDGET(gtk_builder_get_object(builder, "btn2"));
+    lblConnectionStatus = GTK_WIDGET(gtk_builder_get_object(builder, "lblConnectionStatus"));
+    btnExit = GTK_WIDGET(gtk_builder_get_object(builder, "btnExit"));
+    btnExitLoop = GTK_WIDGET(gtk_builder_get_object(builder, "btnExitLoop"));
+
 
     // widgets pointer will be passed to all widget handler functions as the user_data parameter
 
@@ -42,6 +54,8 @@ int main(int argc, char *argv[])
     gtk_builder_connect_signals(builder, widgets);    // note: second parameter is not NULL
     //gtk_builder_connect_signals(builder, status);    // note: second parameter is not NULL
     g_signal_connect (buttonf2, "clicked", G_CALLBACK (my_func), &data);
+    g_signal_connect (btnExit, "clicked", G_CALLBACK (gtk_main_quit), NULL);
+    g_signal_connect (btnExitLoop, "clicked", G_CALLBACK (exitLoop), ptrExitLoop);
 
 
     g_object_unref(builder);
@@ -49,30 +63,36 @@ int main(int argc, char *argv[])
 
     // USB INIT
     libusb_init(NULL);   // инициализация
-
     libusb_set_debug(NULL, USB_DEBUG_LEVEL);  // уровень вывода отладочных сообщений
     libusb_device_handle *handle = libusb_open_device_with_vid_pid(NULL, VID, PID);
 
+    concheck(handle, lblConnectionStatus);
 
-    if (handle == NULL) {
+    g_print ("%p\n" , ptrExitLoop);
 
-        g_print ("Device No Connected \n");
-        status->x = 1;
-        //return 1;
-    }
-    else
-    {
-        status->x = 0;
-        g_print ("NOppa/n");
-    }
-
-
+    testRead (handle);
 
     gtk_widget_show(window);
-    gtk_main();
+    // while (gtk_events_pending()) gtk_main_iteration_do(FALSE);
+    //gtk_main();
     // free up memory used by widget structure, probably not necessary as OS will
     // reclaim memory from application after it exits
+
+    while (ExitLoop==0)
+    {
+        //        myTestFunc();
+
+        gtk_main_iteration();
+
+        interrupt_transfer_loop(handle, rx);
+
+    }
+
     g_slice_free(app_widgets, widgets);
+    //libusb_attach_kernel_driver(handle, DEV_INTF);
+    //libusb_close(handle);
+    //libusb_exit(NULL);
+
 
     return 0;
 }
@@ -109,15 +129,22 @@ void on_btn_update_clicked(GtkButton *button, app_widgets *app_wdgts)
 
 
 
-
-
+//Test Function. For any experiments
 static void my_func (GtkWidget* w , Data *data)
-
 {
-    int a = data->i;
-
-    g_print ("%d\n", a);
+    int a = data->check;
+    g_print ("sssssss");
 }
+
+
+//Function for exit from main Loop. ExitLoop variable make equal 1.
+static void exitLoop (GtkWidget* w , gpointer ptrExitLoop)
+{
+    //    int a = *ptrExitLoop;
+    g_print ("%p\n" , ptrExitLoop);
+    (*(int*)ptrExitLoop) = 1;
+}
+//*****************************************************************
 
 
 

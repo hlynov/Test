@@ -8,13 +8,13 @@
 GtkBuilder      *builder;
 GtkWidget       *window;
 GtkWidget       *buttonf2;
+GtkWidget       *lblConnectionStatus;
+GtkWidget       *btnExit;
+GtkWidget       *btnExitLoop;
 
 //****************************************************
-//Structures
 //
 //****************************************************
-
-int *check;
 
 
 typedef struct
@@ -34,6 +34,7 @@ typedef struct {
 
 typedef struct
 {
+    int check;
     int i;
 } Data;
 
@@ -42,6 +43,7 @@ typedef struct
 //******************************************************
 
 static void my_func (GtkWidget* w , Data *data);
+static void exitLoop (GtkWidget* w , gpointer ptrExitLoop);
 
 
 

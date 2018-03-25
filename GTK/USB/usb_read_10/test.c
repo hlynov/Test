@@ -34,6 +34,8 @@ int res       = 0;  /* return codes from libusb functions */
 int numBytes  = 0;  /* Actual bytes transferred. */
 int rc;
 int transferred = 0;
+
+
 unsigned char Report_to_read[64];
 
 
@@ -53,7 +55,7 @@ int main() {
     // unsigned char EP_out = 0x81; // write into usb  end point
     // unsigned char EP_in  = 0x01; // read from usb end point
 
-    unsigned char TX[8] = {04, 02, 03, 04, 05, 06, 07, 07}; //reqwest
+    unsigned char TX[8] = {04, 02, 03, 04, 05, 06, 07, 03}; //reqwest
     unsigned char RX[521]; //answer
 
     struct libusb_device_descriptor desc; //description of device structure
@@ -144,7 +146,7 @@ int main() {
 
 
     interrupt_transfer_loop(handle);
-    // bulk_transfer_loop(handle);
+    bulk_transfer_loop(handle);
 
 
     libusb_attach_kernel_driver(handle, DEV_INTF);

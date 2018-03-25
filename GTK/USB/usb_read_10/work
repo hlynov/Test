@@ -32,27 +32,27 @@ nmap gx <Plug>NetrwBrowseX
 nnoremap j gj
 nnoremap k gk
 nnoremap <silent> n nzz
+nmap <F6> :bp
+nmap <F7> :bn
+nmap <F9> :w:make
+nmap <F12> :Explore
+vmap <S-Left> :tabprevious
+vmap <S-Right> :tabnext
 vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())
 nmap <S-Right> :tabnext
-vmap <S-Right> :tabnext
 omap <S-Right> :tabnext
 nmap <S-Left> :tabprevious
-vmap <S-Left> :tabprevious
 omap <S-Left> :tabprevious
 nnoremap <F10> :update:call Make()
 vmap <F12> :Explorei
-nmap <F12> :Explore
 omap <F12> :Explore
 nmap <F11> :set nu!
 vmap <F9> :w:makei
-nmap <F9> :w:make
 omap <F9> :w:make
 vmap <F7> :bni
-nmap <F7> :bn
 omap <F7> :bn
 vmap <F6> :bpi
-nmap <F6> :bp
 omap <F6> :bp
 nmap <S-F5> :BufExplorer
 vmap <F5> :buffers
@@ -144,27 +144,294 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/main.c
-badd +0 ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/hl_d3d.h
+badd +1 ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/main.c
+badd +1 ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/hl_d3d.h
+badd +1 ~/Documents/gittest/test/GTK/USB/usb_read_10/test.c
 argglobal
 silent! argdel *
-edit ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2
+edit ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/hl_d3d.h
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
 1wincmd h
-wincmd _ | wincmd |
-split
-1wincmd k
-wincmd w
 wincmd w
 wincmd t
 set winminheight=1 winheight=1 winminwidth=1 winwidth=1
-exe '1resize ' . ((&lines * 24 + 26) / 52)
 exe 'vert 1resize ' . ((&columns * 105 + 105) / 211)
-exe '2resize ' . ((&lines * 24 + 26) / 52)
 exe 'vert 2resize ' . ((&columns * 105 + 105) / 211)
-exe 'vert 3resize ' . ((&columns * 105 + 105) / 211)
+argglobal
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal backupcopy=
+setlocal balloonexpr=
+setlocal nobinary
+setlocal nobreakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=class,def,do,elif,else,except,finally,for,if,switch,try,while,with
+set colorcolumn=81
+setlocal colorcolumn=81
+setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+setlocal commentstring=/*%s*/
+setlocal complete=.,b,d,i,k,s,t,U,u,w
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal copyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'cpp'
+setlocal filetype=cpp
+endif
+setlocal fixendofline
+set foldcolumn=1
+setlocal foldcolumn=1
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+set foldlevel=10
+setlocal foldlevel=10
+setlocal foldmarker={{{,}}}
+set foldmethod=indent
+setlocal foldmethod=indent
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=0
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal infercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal lispwords=
+set list
+setlocal list
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=<:>,(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=bin,octal,hex
+set number
+setlocal number
+set numberwidth=3
+setlocal numberwidth=3
+setlocal omnifunc=ccomplete#Complete
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+set relativenumber
+setlocal relativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=4
+setlocal noshortname
+setlocal signcolumn=auto
+setlocal smartindent
+setlocal softtabstop=4
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en_us
+setlocal statusline=
+setlocal suffixesadd=
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'cpp'
+setlocal syntax=cpp
+endif
+setlocal tabstop=4
+setlocal tagcase=
+setlocal tags=
+setlocal termkey=
+setlocal termsize=
+setlocal textwidth=80
+setlocal thesaurus=
+setlocal noundofile
+setlocal undolevels=-123456
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+let s:l = 24 - ((19 * winheight(0) + 25) / 51)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+24
+normal! 0
+lcd ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2
+wincmd w
+argglobal
+if bufexists('~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/main.c') | buffer ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/main.c | else | edit ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/main.c | endif
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal backupcopy=
+setlocal balloonexpr=
+setlocal nobinary
+setlocal nobreakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=class,def,do,elif,else,except,finally,for,if,switch,try,while,with
+set colorcolumn=81
+setlocal colorcolumn=81
+setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+setlocal commentstring=/*%s*/
+setlocal complete=.,b,d,i,k,s,t,U,u,w
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal copyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'c'
+setlocal filetype=c
+endif
+setlocal fixendofline
+set foldcolumn=1
+setlocal foldcolumn=1
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+set foldlevel=10
+setlocal foldlevel=10
+setlocal foldmarker={{{,}}}
+set foldmethod=indent
+setlocal foldmethod=indent
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=0
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal infercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal lispwords=
+set list
+setlocal list
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=<:>,(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=bin,octal,hex
+set number
+setlocal number
+set numberwidth=3
+setlocal numberwidth=3
+setlocal omnifunc=ccomplete#Complete
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+set relativenumber
+setlocal relativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=4
+setlocal noshortname
+setlocal signcolumn=auto
+setlocal smartindent
+setlocal softtabstop=4
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en_us
+setlocal statusline=
+setlocal suffixesadd=
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'c'
+setlocal syntax=c
+endif
+setlocal tabstop=4
+setlocal tagcase=
+setlocal tags=
+setlocal termkey=
+setlocal termsize=
+setlocal textwidth=80
+setlocal thesaurus=
+setlocal noundofile
+setlocal undolevels=-123456
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+13
+normal! zo
+let s:l = 86 - ((24 * winheight(0) + 25) / 51)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+86
+normal! 05|
+lcd ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2
+wincmd w
+exe 'vert 1resize ' . ((&columns * 105 + 105) / 211)
+exe 'vert 2resize ' . ((&columns * 105 + 105) / 211)
+tabedit ~/Documents/gittest/test/GTK/USB/usb_read_10
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+wincmd t
+set winminheight=1 winheight=1 winminwidth=1 winwidth=1
+exe 'vert 1resize ' . ((&columns * 105 + 105) / 211)
+exe 'vert 2resize ' . ((&columns * 105 + 105) / 211)
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
@@ -303,146 +570,16 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 13 - ((12 * winheight(0) + 12) / 24)
+let s:l = 15 - ((14 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-13
+15
 normal! 0
 lcd ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2
 wincmd w
 argglobal
-if bufexists('~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/hl_d3d.h') | buffer ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/hl_d3d.h | else | edit ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/hl_d3d.h | endif
-setlocal keymap=
-setlocal noarabic
-setlocal autoindent
-setlocal backupcopy=
-setlocal balloonexpr=
-setlocal nobinary
-setlocal nobreakindent
-setlocal breakindentopt=
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=class,def,do,elif,else,except,finally,for,if,switch,try,while,with
-set colorcolumn=81
-setlocal colorcolumn=81
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-setlocal commentstring=/*%s*/
-setlocal complete=.,b,d,i,k,s,t,U,u,w
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=
-setlocal copyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'cpp'
-setlocal filetype=cpp
-endif
-setlocal fixendofline
-set foldcolumn=1
-setlocal foldcolumn=1
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-set foldlevel=10
-setlocal foldlevel=10
-setlocal foldmarker={{{,}}}
-set foldmethod=indent
-setlocal foldmethod=indent
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=croql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal formatprg=
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=0
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal infercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal lispwords=
-set list
-setlocal list
-setlocal makeencoding=
-setlocal makeprg=
-setlocal matchpairs=<:>,(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=bin,octal,hex
-set number
-setlocal number
-set numberwidth=3
-setlocal numberwidth=3
-setlocal omnifunc=ccomplete#Complete
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-set relativenumber
-setlocal relativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal signcolumn=auto
-setlocal smartindent
-setlocal softtabstop=4
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en_us
-setlocal statusline=
-setlocal suffixesadd=
-setlocal noswapfile
-setlocal synmaxcol=3000
-if &syntax != 'cpp'
-setlocal syntax=cpp
-endif
-setlocal tabstop=4
-setlocal tagcase=
-setlocal tags=
-setlocal termkey=
-setlocal termsize=
-setlocal textwidth=80
-setlocal thesaurus=
-setlocal noundofile
-setlocal undolevels=-123456
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-let s:l = 27 - ((11 * winheight(0) + 12) / 24)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-27
-normal! 0
-lcd ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2
-wincmd w
-argglobal
-if bufexists('~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/main.c') | buffer ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/main.c | else | edit ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2/main.c | endif
+if bufexists('~/Documents/gittest/test/GTK/USB/usb_read_10/test.c') | buffer ~/Documents/gittest/test/GTK/USB/usb_read_10/test.c | else | edit ~/Documents/gittest/test/GTK/USB/usb_read_10/test.c | endif
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -563,23 +700,18 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-8
-normal! zo
-let s:l = 44 - ((24 * winheight(0) + 24) / 49)
+let s:l = 147 - ((22 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-44
-normal! 09|
+147
+normal! 0
 lcd ~/Documents/gittest/test/GTK/D3dUsbDrive-2.2
 wincmd w
 2wincmd w
-exe '1resize ' . ((&lines * 24 + 26) / 52)
 exe 'vert 1resize ' . ((&columns * 105 + 105) / 211)
-exe '2resize ' . ((&lines * 24 + 26) / 52)
 exe 'vert 2resize ' . ((&columns * 105 + 105) / 211)
-exe 'vert 3resize ' . ((&columns * 105 + 105) / 211)
-tabnext 1
+tabnext 2
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
 endif

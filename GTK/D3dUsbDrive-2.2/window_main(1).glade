@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.3 -->
+<!-- Generated with glade 3.20.4 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkWindow" id="window_main">
@@ -84,11 +84,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel">
+              <object class="GtkLabel" id="lblConnectionStatus">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">disconnect</property>
+                <property name="label" translatable="yes">...</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -326,17 +326,17 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton">
-                <property name="label" translatable="yes">button</property>
+              <object class="GtkButton" id="btnExit">
+                <property name="label" translatable="yes">EXIT</property>
                 <property name="width_request">100</property>
-                <property name="height_request">80</property>
+                <property name="height_request">15</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
               </object>
               <packing>
-                <property name="x">24</property>
-                <property name="y">20</property>
+                <property name="x">14</property>
+                <property name="y">120</property>
               </packing>
             </child>
             <child>
@@ -350,6 +350,20 @@
               <packing>
                 <property name="x">480</property>
                 <property name="y">146</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="btnExitLoop">
+                <property name="label" translatable="yes">ExitLoop</property>
+                <property name="width_request">100</property>
+                <property name="height_request">15</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="x">14</property>
+                <property name="y">83</property>
               </packing>
             </child>
           </object>
