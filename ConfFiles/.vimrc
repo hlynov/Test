@@ -1,201 +1,390 @@
-" AUTHOR:
-" COPYRIGHT (C) KARLKORP
-" VIM CONFIGURATION FILE
-" E-MAIL: LISPGOD@GMAIL.COM
+set nocompatible " be iMproved, required
+filetype off     " required
 
-" =============================================================================
-set nocompatible
+"=====================================================
+" Vundle settings
+"=====================================================
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" =============================================================================
+Plugin 'gmarik/Vundle.vim'              " let Vundle manage Vundle, required
+"---------=== Code/project navigation ===-------------
+Plugin 'scrooloose/nerdtree'            " A tree explorer plugin for vim
+Plugin 'Shougo/unite.vim'               " Navigation between buffers and files
+Plugin 'majutsushi/tagbar'              " Class/module browser
+
+"------------------=== Other ===----------------------
+Plugin 'vim-airline/vim-airline'        " Lean & mean status/tabline for vim that's light as air
+Plugin 'vim-airline/vim-airline-themes' " Themes for vim-airline
+Plugin 'fisadev/FixedTaskList.vim'      " Pending tasks list
+Plugin 'rosenfeld/conque-term'          " Consoles as buffers
+Plugin 'tpope/vim-surround'             " Parentheses, brackets, quotes, XML tags, and more
+
+"--------------=== Snippets support ===---------------
+Plugin 'garbas/vim-snipmate'            " Snippets manager
+Plugin 'MarcWeber/vim-addon-mw-utils'   " Dependencies #1
+Plugin 'tomtom/tlib_vim'                " Dependencies #2
+Plugin 'honza/vim-snippets'             " Snippets repo
+
+"---------------=== Languages support ===-------------
+Plugin 'scrooloose/syntastic'           " Syntax checking plugin for Vim
+Plugin 'tpope/vim-commentary'           " Comment stuff out
+Plugin 'mitsuhiko/vim-sparkup'          " Sparkup (XML/jinja/htlm-django/etc.) support
+
+" --- Clojure ---
+Plugin 'tpope/vim-fireplace'            " Clojure completion
+Plugin 'guns/vim-clojure-highlight'     " Highlighting code
+Plugin 'guns/vim-clojure-static'        " Highlighting for static types
+
+" --- Erlang ---
+Plugin 'jimenezrick/vimerl'             " The Erlang plugin for Vim
+
+" --- CSS ---
+Plugin 'JulesWang/css.vim'              " CSS syntax file
+Plugin 'groenewege/vim-less'            " Vim syntax for LESS (dynamic CSS)
+
+" --- JavaScript ---
+Plugin 'pangloss/vim-javascript'        " Vastly improved Javascript indentation and syntax support in Vim
+
+" --- HTML ---
+Plugin 'othree/html5.vim'               " HTML5 omnicomplete and sytnax
+Plugin 'idanarye/breeze.vim'            " Html navigation like vim-easymotion, tag matching, tag highlighting and DOM navigation
+
+" --- Python ---
+Plugin 'davidhalter/jedi-vim'           " Awesome Python autocompletion with VIM
+Plugin 'klen/python-mode'               " Vim python-mode. PyLint, Rope, Pydoc, breakpoints from box
+Plugin 'mitsuhiko/vim-jinja'            " Jinja support for vim
+Plugin 'mitsuhiko/vim-python-combined'  " Combined Python 2/3 for Vim
+Plugin 'hynek/vim-python-pep8-indent'   " PEP8 indent
+Plugin 'jmcantrell/vim-virtualenv'      " Virtualenv support in VIM
+
+" --- Rust ---
+Plugin 'rust-lang/rust.vim'             " Vim support for Rust file detection and syntax highlighting
+Plugin 'racer-rust/vim-racer'           " Rust code completion in vim via racer
+
+call vundle#end() " required
+filetype on
+filetype plugin on
 filetype plugin indent on
-syntax enable
 
-" =============================================================================
-set nopaste
-set clipboard=unnamed
-set cryptmethod=blowfish
-runtime macros/matchit.vim
+"=====================================================
+" General settings
+"=====================================================
 
-" =============================================================================
-
-
-set buftype=
-set smarttab
-set expandtab
-set tabstop=4
-set shiftround
-set shiftwidth=4
-set softtabstop=4
-set autoindent
-set copyindent
-set smartindent
-
-" =============================================================================
-set nojoinspaces
-
-" =============================================================================
-set nobackup
-set noswapfile
-set virtualedit=block
-
-" =============================================================================
-set encoding=utf-8
-set termencoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8,cp1251,koi8-r
-set fileformat=unix
-set fileformats=unix,dos,mac
-
-" =============================================================================
 set backspace=indent,eol,start
-set complete=.,b,d,i,k,s,t,U,u,w
-set omnifunc=syntaxcomplete#Complete
-set completeopt=longest,menu,menuone,preview
-set pumheight=7
-set cinwords=class,def,do,elif,else,except
-set cinwords+=finally,for,if,switch,try,while,with
-set sessionoptions=blank,buffers,curdir,folds,help
-set sessionoptions+=options,slash,tabpages,unix,winsize
+" This must happen before the syntax system is enabled
+aunmenu Help.
+aunmenu Window.
+let no_buffers_menu=1
+set mousemodel=popup
 
-" =============================================================================
-if (&filetype == "lisp")
-    set lisp
-endif
-
-" =============================================================================
-set autoread
-set autowrite
-set autochdir
-
-" =============================================================================
-set cmdheight=1
-set cmdwinheight=7
-set textwidth=80
-set colorcolumn=81
-
-" =============================================================================
-set foldenable
-set foldclose=""
-set foldcolumn=1
-set foldlevel=10
-set foldlevelstart=10
-set foldmethod=indent
-set foldopen=block,hor,mark,percent,quickfix,search,tag,undo
-
-" =============================================================================
-set hidden
-set hlsearch
-set incsearch
-set smartcase
-set infercase
-set ignorecase
-set iminsert=0
-set imsearch=0
-set helplang=en
-set langmenu=en
-language messages POSIX
-
-" =============================================================================
-set lazyredraw
-set list
-set listchars=tab:>~,trail:.
-set showmatch
-set matchpairs=<:>,(:),{:},[:]
-set modeline
-set modelines=1
-
-" =============================================================================
-set mouse=a
-set mousehide
-set mousemodel=extend
-
-" =============================================================================
-set noconfirm
-set nocursorline
-set nocursorcolumn
-set magic
-set nogdefault
-set noruler
-set nospell
-set spelllang=en_us
-set noerrorbells
-set novisualbell
-
-" =============================================================================
-set number
-set numberwidth=3
-set relativenumber
-set report=0
-set scrolloff=10
-set scrolljump=10
-set shortmess=I
-set showcmd
-set showfulltag
-set noshowmode
-set splitbelow
-set splitright
-set equalalways
-
-" =============================================================================
-set laststatus=2
-set statusline=%F%r%h%w
-set statusline+=\ %m
-set statusline+=\ %=%y
-set statusline+=\ [%{&ff}]
-set statusline+=\ Buffer:[%n]
-set statusline+=\ Column:[%v]
-set statusline+=\ Line:%l/%L[%p%%]
-set statusline+=\ Mode:[%{ShowCurrentMode()}]
-" =============================================================================
-set switchbuf=newtab,split,useopen,usetab
-set tabline=""
-set showtabline=2
-set timeout
-set timeoutlen=3000
-set ttimeoutlen=100
-set title
-set ttyfast
-set history=1000
-set undolevels=5000
-set viewoptions=cursor,folds,options,slash,unix
-
-" =============================================================================
-set wildmenu
-set wildmode=longest:full,full
-set wildignore=*.bak,*.bin,*.class,*.exe,*.o,*.obj,*.pyc,*.pyo,*.swp
-set wrap
-set wrapscan
-set nolinebreak
-set whichwrap=<,>,[,]
-
-" =============================================================================
-set t_Co=256
-colorscheme default
-set background=light
+" Activate a permanent ruler and add line highlightng as well as numbers.
+" Also disable the sucking pydoc preview window for the omni completion
+" and highlight current line and disable the blinking cursor.
+set ruler
+set completeopt-=preview
+set gcr=a:blinkon0
 if has("gui_running")
-    winsize 111 37
-    set linespace=0
-    silent! cd $HOME
-    set guioptions=""
-    set guitablabel=""
-    try
-        if has("mac")
-            set antialias
-            set guifont=Monaco:h12
-        elseif has("unix")
-            set guifont=DejaVu\ Sans\ Mono\ 12
-        elseif (has("win32") || has("win64"))
-            set guifont=DejaVu_Sans_Mono:h12
-        endif
-    catch /.*/
-        echoerr "Font not listed in the system font list!"
-    endtry
-    highlight ColorColumn guibg=NONE guifg=#FF0000 gui=BOLD
-    highlight FoldColumn guibg=NONE guifg=#000000 gui=NONE
-else
-    highlight ColorColumn ctermbg=NONE ctermfg=1* cterm=BOLD
-    highlight FoldColumn ctermbg=NONE ctermfg=0 cterm=NONE
+    set cursorline
 endif
+set ttyfast
+
+colorscheme nightly
+" set guifont=Consolas:h13
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
+
+" Enable Syntax Colors
+" in GUI mode we go with fruity and Monaco 13
+" in CLI mode myterm looks better (fruity is GUI only)
+syntax on
+if has("gui_running")
+    set macmeta " comment this line if you're not using Mac OS
+    set lines=50 columns=125
+endif
+" special settings for vim
+if has("mac")
+    let macvim_hig_shift_movement = 1
+endif
+
+tab sball
+set switchbuf=useopen
+
+" Use system clipboard
+set clipboard=unnamedplus
+
+" Customize the wildmenu
+set wildmenu
+set wildignore+=*.dll,*.o,*.pyc,*.bak,*.exe,*.jpg,*.jpeg,*.png,*.gif,*$py.class,*.class,*/*.dSYM/*,*.dylib
+set wildmode=list:full
+
+" Don't bell and blink
+set visualbell t_vb=    " turn off error beep/flash
+set novisualbell        " turn off visual bell
+set enc=utf-8           " utf-8 default encoding
+set ls=2                " always show status bar
+set incsearch           " incremental search
+set hlsearch            " highlighted search results
+set nu                  " line numbers
+set scrolloff=5         " keep some more lines for scope
+set showmatch           " show matching brackets/parenthesis
+set matchtime=0         " don't blink when matching
+
+" Swaps and backups
+if has("win32") || has("win64")
+    set dir=$TMP
+    set backupdir=$TMP
+else
+    set dir=/tmp
+    set backupdir=/tmp
+endif
+
+" Hide some panels
+"set guioptions-=m  " remove menu bar
+set guioptions-=T   " remove toolbar
+"set guioptions-=r  " remove right-hand scroll bar
+
+" Tab Settings
+set smarttab
+set tabstop=8
+
+" Highlight characters past column 120
+augroup vimrc_autocmds
+    autocmd!
+    autocmd FileType ruby,python,javascript,c,cpp highlight Excess ctermbg=DarkGrey guibg=#c12a0f
+    autocmd FileType ruby,python,javascript,c,cpp match Excess /\%80v.*/
+    autocmd FileType ruby,python,javascript,c,cpp set nowrap
+augroup END
+
+" SnipMate settings
+let g:snippets_dir = "~/.vim/vim-snippets/snippets"
+
+"NERDTree
+map <F1> :NERDTreeToggle<CR>    " browse the list of files in the current directory
+
+" Unite settings
+nnoremap <F2> :Unite buffer<CR> " browse a list of the currently opened buffers
+
+" TaskList settings
+map <F3> :TaskList<CR> " show pending tasks list
+
+" TagBar settings
+map <F4> :TagbarToggle<CR>
+let g:tagbar_autofocus = 0 " autofocus on Tagbar open
+
+" ConqueTerm
+nnoremap <F5> :ConqueTermSplit ipython<CR> " run python-scripts at <F5>
+nnoremap <F6> :exe "ConqueTermSplit ipython " . expand("%")<CR> " and debug-mode for <F6>
+let g:ConqueTerm_StartMessages = 0
+let g:ConqueTerm_CloseOnEnd = 0
+
+" Jedi-vim
+let g:jedi#show_call_signatures = 1 " Show call signatures
+let g:jedi#popup_on_dot = 1         " Enable autocomplete on dot
+let g:jedi#popup_select_first = 0   " Disable first select from auto-complete
+
+" Syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_aggregate_errors = 1
+noremap <f7> :w<CR>:SyntasticCheck<CR>
+
+" Better :sign interface symbols
+let g:syntastic_error_symbol = 'X'
+let g:syntastic_style_error_symbol = 'X'
+let g:syntastic_warning_symbol = 'x'
+let g:syntastic_style_warning_symbol = 'x'
+
+" Vim-Airline
+let g:airline_theme='powerlineish'
+
+"" Переключение табов (вкладок) (rxvt-style)
+map <S-left> :tabprevious<cr>
+nmap <S-left> :tabprevious<cr>
+imap <S-left> <ESC>:tabprevious<cr>i
+map <S-right> :tabnext<cr>
+nmap <S-right> :tabnext<cr>
+
+imap <S-right> <ESC>:tabnext<cr>i
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"=====================================================
+" Python-mode settings
+"=====================================================
+" Python-mode
+" Activate rope
+" Keys:
+" K Show python docs
+" <Ctrl-Space> Rope autocomplete
+" <Ctrl-c>g Rope goto definition
+" <Ctrl-c>d Rope show documentation
+" <Ctrl-c>f Rope find occurrences
+" <Leader>b Set, unset breakpoint (g:pymode_breakpoint enabled)
+" [[ Jump on previous class or function (normal, visual, operator modes)
+" ]] Jump on next class or function (normal, visual, operator modes)
+" [M Jump on previous class or method (normal, visual, operator modes)
+" ]M Jump on next class or method (normal, visual, operator modes)
+let g:pymode_rope = 0
+
+" Documentation
+let g:pymode_doc = 0
+let g:pymode_doc_key = 'K'
+"Linting
+let g:pymode_lint = 1
+let g:pymode_lint_checkers = ['pylint', 'pep8']
+let g:pymode_lint_cwindow = 1
+let g:pymode_lint_ignore="E501,W601,C0110,C0111"
+let g:pymode_lint_write = 0
+
+" Support virtualenv
+let g:pymode_virtualenv = 1
+
+" Enable breakpoints plugin
+let g:pymode_breakpoint = 1
+let g:pymode_breakpoint_key = '<leader>b'
+
+" Syntax highlighting
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+let g:pymode_syntax_space_errors = g:pymode_syntax_all
+
+" Don't autofold code
+let g:pymode_folding = 0
+
+" Get possibility to run Python code
+let g:pymode_run = 0
+
+" Other options
+let g:pymode_options_colorcolumn = 0
+if has("gui_running")
+    let g:airline_powerline_fonts = 1
+else
+    let g:airline_powerline_fonts = 0
+endif
+
+"=====================================================
+" User hotkeys
+"=====================================================
+" Easier moving of code blocks
+
+
+" Activate autocomplete at <Ctrl+Space>
+inoremap <C-space> <C-x><C-o>
+
+" Generate and insert UUID4 into code by <F12> key
+nnoremap <F12> :call InsertUUID4()<CR>
+
+" Python code check on PEP8
+autocmd FileType python map <buffer> <leader>8 :PymodeLint<CR>
+
+"=====================================================
+" Languages support
+"=====================================================
+" --- C/C++/C# ---
+autocmd FileType c setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd FileType cpp setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd FileType cs setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd FileType c setlocal commentstring=/*\ %s\ */
+autocmd FileType cpp,cs setlocal commentstring=//\ %s
+let c_no_curly_error=1
+let g:syntastic_cpp_include_dirs = ['include', '../include']
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_c_include_dirs = ['include', '../include']
+let g:syntastic_c_compiler = 'clang'
+
+" --- Clojure ---
+autocmd FileType clj setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+
+" --- CSS ---
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType css setlocal commentstring=/*\ %s\ */
+
+" --- Erlang ---
+autocmd Filetype erlang setlocal omnifunc=erlang_complete#Complete
+
+" --- JavaScript ---
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd BufNewFile,BufRead *.json setlocal ft=javascript
+autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType javascript setlocal commentstring=//\ %s
+autocmd FileType javascript let b:javascript_fold = 0
+let javascript_enable_domhtmlcss=1
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_jshint_args='--config ~/.vim/extern-cfg/jshint.json'
+
+" --- HTML ---
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType html setlocal commentstring=<!--\ %s\ -->
+
+" --- Python ---
+let python_highlight_all=1
+let python_highlight_exceptions=0
+let python_highlight_builtins=0
+let python_slow_sync=1
+autocmd FileType python setlocal completeopt-=preview
+autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8
+\ formatoptions+=croq softtabstop=4 smartindent
+\ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+autocmd FileType pyrex setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+let g:syntastic_python_checkers = ['flake8', 'python']
+let g:syntastic_python_flake8_args='--ignore=E121,E128,E711,E301,E261,E241,E124,E126,E721
+\ --max-line-length=80'
+
+" --- Rust ---
+set hidden
+let g:racer_cmd = "/Users/savicvalera/racer/target/release/racer"
+let $RUST_SRC_PATH = "/Users/savicvalera/rust/src"
+autocmd BufRead,BufNewFile *.rs set filetype=rust
+autocmd FileType rust setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
+autocmd FileType rust setlocal commentstring=//\ %s
+
+" --- Vim ---
+autocmd FileType vim setlocal expandtab shiftwidth=2 tabstop=8 softtabstop=2
+
+" --- template language support (SGML / XML too) ---
+autocmd FileType xml,html,htmljinja,htmldjango setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType html,htmljinja,htmldjango imap <buffer> <c-e> <Plug>SparkupExecute
+autocmd FileType html,htmljinja,htmldjango imap <buffer> <c-l> <Plug>SparkupNext
+autocmd FileType htmljinja setlocal commentstring={#\ %s\ #}
+let html_no_rendering=1
+let g:syntastic_html_checkers = []
+
+"=====================================================
+" User functions
+"=====================================================
+" Small helper that inserts a random uuid4
+" ----------------------------------------
+function! InsertUUID4()
+python << endpython
+if 1:
+    import uuid, vim
+    s = str(uuid.uuid4())
+    cpos = vim.current.window.cursor
+    cline = vim.current.line
+    vim.current.line = cline[:cpos[1] + 1] + s + cline[cpos[1] + 1:]
+    vim.current.window.cursor = (cpos[0], cpos[1] + len(s))
+endpython
+endfunction
+
+
 
 " =============================================================================
 function! FormatFile()
@@ -290,168 +479,4 @@ if has("autocmd")
     augroup END
 endif
 
-
-
-
-
-" =============================================================================
-cnoreabbrev q q!
-cnoreabbrev Q q!
-cnoreabbrev w w!
-cnoreabbrev W w!
-let mapleader=","
-nnoremap j gj
-nnoremap k gk
-nnoremap <C-h> <C-W>h
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
-nnoremap <silent>n nzz
-nnoremap <silent>N Nzz
-nnoremap <silent>* *zz
-nnoremap <silent># #zz
-nnoremap // :nohlsearch<Return>
-nnoremap <leader>r :call Run()<Return>
-vnoremap < <gv
-vnoremap > >gv
-
-"for prefix in ['i', 'n', 'v']
-"    for key in ['<Up>', '<Down>', '<Left>', '<Right>']
-"        execute prefix . "noremap " . key . " <Nop>"
-"    endfor
-"endfor
-
-
-"================================================================================
-
-"НАСТРОЙКИ ГОРЯЧИХ КЛАВИШ
-" F2 - сохранить файл
-nmap <F2> :w<cr>
-vmap <F2> <esc>:w<cr>i
-imap <F2> <esc>:w<cr>i
-" F3 - рекурсивный поиск по файлам (плагин grep.vim)
-nnoremap <silent> <F3> :Rgrep<cr>
-" Shift-F<F3> - добавление найденного к прошлым результатам поиска
-nnoremap <silent> <S-F<F3>> :RgrepAdd<cr>
-" Ctrl-F<F3> - поиск в открытых буферах
-nnoremap <silent> <C-F<F3>> :GrepBuffer<cr>
-" F5 - просмотр списка буферов
-nmap <F5> <Esc>:buffers<cr>
-vmap <F5> <esc>:buffers<cr>
-imap <F5> <esc><esc>:buffers<cr>a
-" при включенном плагине можно использовать его
-nmap <S-F5> :BufExplorer<CR>
-" F6 - предыдущий буфер
-map <F6> :bp<cr>
-vmap <F6> <esc>:bp<cr>i
-imap <F6> <esc>:bp<cr>i
-" F7 - следующий буфер
-map <F7> :bn<cr>
-vmap <F7> <esc>:bn<cr>i
-imap <F7> <esc>:bn<cr>i
-" F9 - сохранение файла и запуск компиляции (make)
-map <F9> :w<cr>:make<cr>
-vmap <F9> <esc>:w<cr>:make<cr>i
-imap <F9> <esc>:w<cr>:make<cr>i
-"
-
-
-
-
-"
-" F11 - включить-выключить нумерацию строк
-imap <F11> <Esc>:set<Space>nu!<CR>a
-nmap <F11> :set<Space>nu!<CR>
-
-" F12 - обозреватель файлов (:Ex для стандартного обозревателя,
-" плагин NERDTree - дерево каталогов)
-map <F12> :Explore<cr>
-vmap <F12> <esc>:Explore<cr>i
-imap <F12> <esc>:Explore<cr>i
-
-
-" Save and make current file.o
-function! Make()
-    let curr_dir = expand('%:h')
-    if curr_dir == ''
-        let curr_dir = '.'
-    endif
-    echo curr_dir
-    execute 'lcd ' . curr_dir
-    execute 'make %:r.o'
-    execute 'lcd -'
-endfunction
-nnoremap <F10> :update<CR>:call Make()<CR>
-
-
-
-
-
-"" Переключение табов (вкладок) (rxvt-style)
-map <S-left> :tabprevious<cr>
-nmap <S-left> :tabprevious<cr>
-imap <S-left> <ESC>:tabprevious<cr>i
-map <S-right> :tabnext<cr>
-nmap <S-right> :tabnext<cr>
-
-imap <S-right> <ESC>:tabnext<cr>i
-
-
-
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
-
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'jlanzarotta/bufexplorer'
-
-
-Plugin 'git://GitHub.com/Wh0p/FSwitch.git'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltisnipsJumpForwardTrigger="<c-b>"
-let g:UltisnipsJumpBackwardTrigger="<c-z>"
-
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
