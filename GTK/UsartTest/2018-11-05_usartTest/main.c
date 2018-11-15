@@ -1,5 +1,11 @@
-/*MY TEST PROGRAMM*/
-/******************/
+/******************************************************************************/
+* File Name :   main.c
+* Author :      DESK3D machinary
+* Version :     2.2
+* Date :        2018-11-15
+* Target :      PC
+* Description : TermoFanPC-2.2
+*******************************************************************************/
 
 #include "main.h"
 #include "myprog.h"
@@ -7,27 +13,29 @@
 
 int main (int argc, char *argv[]){
 
-    //служебные переменные для работы с com портом
-    ComPD comportdata;
-    comportdata.fd = 0;
-    strcpy (comportdata.testvar, "Привет из comportData");
-
-    struct comportdata *comportdata_adr;//объявление указателя на структуру
+        //Заполнение полей структур
+	ComPD comportdata; // экземпляр для работы с COM-портом	
+	comportdata.fd = 0;
+	strcpy (comportdata.testvar, "Привет из comportData"); //Просто для проверки
+	struct comportdata *comportdata_adr;//объявление указателя на структуру. Проверить зачем оно надо!!!
 	
-    const gchar* home = "mystyle.css";
-    GError *error = 0;
-
-	MyData threadData; // создали структуру data
-
-    threadData.i=10;
-    char *message[] = {"My message from data struct"};
-    threadData.msg = *message;
+	MyData threadData; // создали структуру data, для передачи данных в поток
+	//Заполнение полей структур
+	threadData.i=10;
+	char *message[] = {"My message from data struct"};
+	threadData.msg = *message;
+	    
     
-    //переменные для работы с потоками
+	//переменные для работы с потоками
     int id1, id2, result;
-    pthread_t thread1, thread2;
+    pthread_t thread1, thread2, SendTaskThread, GetTaskThread;
     id1 = 1; /*идентификатор потока*/
-  
+	
+	
+	
+  	const gchar* home = "mystyle.css";
+	GError *error = 0;
+	
     /*This is called in all GTK applications.*/
     gtk_init (&argc, &argv);
     /*g_thread_init(NULL);  /*инициализация работы с потоками*/
@@ -45,11 +53,6 @@ int main (int argc, char *argv[]){
     gtk_css_provider_load_from_file(provider, g_file_new_for_path(home), &error);
     g_object_unref (provider);
     /* -----------------------------------------------------------*/
-
-
-
-
-
     // get pointers to label widgets
     lbl1  = GTK_WIDGET(gtk_builder_get_object(builder, "lbl1"));
     lbl2  = GTK_WIDGET(gtk_builder_get_object(builder, "lbl2"));
@@ -62,7 +65,7 @@ int main (int argc, char *argv[]){
 
         //gtk_builder_connect_signals(builder, status);    // note: second parameter is not NULL
     
-    g_signal_connect (btn1, "clicked", G_CALLBACK (button_callback), &comportdata);
+    g_signal_connect (btn1, "clicked", G_CALLBACK (Press_F1), &comportdata);
     g_signal_connect (btn2, "clicked", G_CALLBACK (Press_F2), NULL);
     g_signal_connect (btnExit, "clicked", G_CALLBACK (window_destroy), NULL);
     g_signal_connect (entry1, "activate",   G_CALLBACK (entry_test), entry1);
@@ -70,8 +73,6 @@ int main (int argc, char *argv[]){
 
     g_object_unref(builder);
 
-
-    
     
     int fd2;
     comportInit(&comportdata);
@@ -124,7 +125,7 @@ int main (int argc, char *argv[]){
 
 
 
-static void button_callback(GtkWidget  *w , gpointer data)
+static void Press_F1 (GtkWidget  *w , gpointer data)
 {
     ComPD *dataF1 = (ComPD *) data;
     
@@ -156,7 +157,6 @@ void *thread_func(void *thread_data)
     int i;
     char buf[9];
     ComPD *data = (ComPD *) thread_data;
-
     while(1)
     {
     data->iIn=read(data->fd,buf,4); /*чтения приходящих данных из порта*/
@@ -185,9 +185,15 @@ static void spinfan_test( GtkWidget *widget, GtkWidget *spinfan)
   //g_print ("Entry contents: %s\n", spinvalue);
   g_snprintf(out_str, sizeof(out_str), "%d", spinvalue);
   gtk_label_set_text(GTK_LABEL(lbl2), out_str);
-
-
 }
+
+
+// Функция потока формирования задачи и отправки по UART
+void *SendTask(TfUartTask)
+{
+	
+}
+
 
 
 
@@ -198,3 +204,7 @@ void window_destroy()
 {
     gtk_main_quit();
 }
+
+
+//End of Programm. D3D. 2018г
+
