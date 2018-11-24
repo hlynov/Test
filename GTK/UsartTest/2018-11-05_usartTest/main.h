@@ -60,14 +60,13 @@ typedef struct comport
 } ComPD;
 
 
-
-
 static void my_func(GtkButton*, GtkWindow*);
 static void my_func2();
-static void button_callback(GtkWidget* w ,gpointer data);
 static void window_destroy();
 void *thread_func(void *thread_data);
 int comportInit(struct comport *t);
+
+static void Press_F1(GtkWidget* w ,gpointer data);
 static void Press_F2 (GtkWidget *widget, gpointer data);
 
 static void entry_test( GtkWidget *widget, GtkWidget *entry );
@@ -78,12 +77,3 @@ void mainwindowdraw();
 
 
 #endif
-
-
-
-
-
-
-
-
-
